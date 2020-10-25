@@ -61,10 +61,9 @@ const App: () => React$Node = () => {
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Learn More</Text>
               <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
+                {global.ztlong.getStaticField()}
               </Text>
             </View>
-            <LearnMoreLinks />
           </View>
         </ScrollView>
       </SafeAreaView>

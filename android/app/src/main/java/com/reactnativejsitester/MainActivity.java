@@ -5,12 +5,14 @@ import android.os.Bundle;
 import com.aniu.jsilib.NativeFunCallUtils;
 import com.facebook.react.NativeModuleRegistryBuilder;
 import com.facebook.react.ReactActivity;
+import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.bridge.ReactContext;
 
-public class MainActivity extends ReactActivity {
+public class MainActivity extends ReactActivity implements ReactInstanceManager.ReactInstanceEventListener {
 
   // Used to load the 'native-lib' library on application startup.
   static {
-    System.loadLibrary("native-lib");
+    System.loadLibrary("jsi-lib");
   }
 
 
@@ -27,5 +29,27 @@ public class MainActivity extends ReactActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     System.out.println(NativeFunCallUtils.stringFromJNI());
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    getReactInstanceManager().addReactInstanceEventListener(this);
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    getReactInstanceManager().addReactInstanceEventListener(this);
+  }
+
+  @Override
+  public void onReactContextInitialized(ReactContext context) {
+    NativeFunCallUtils.installJSI(context.getJavaScriptContextHolder().get());
+  }
+
+  @Override
+  public void onPointerCaptureChanged(boolean hasCapture) {
+
   }
 }
