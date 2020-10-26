@@ -66,6 +66,8 @@ JNIEnv *attachCurrentThread()
     auto result = jvm->AttachCurrentThread(&env, &args);
     return env;
 }
+
+
 jsi::Value JSIinstaller::get(
         jsi::Runtime &runtime,
         const jsi::PropNameID &name)
@@ -84,17 +86,18 @@ jsi::Value JSIinstaller::get(
                         const jsi::Value *arguments,
                         size_t count) -> jsi::Value {
                     auto env = attachCurrentThread();
-
                     auto runTest = env->GetStaticMethodID(globalClazz, "runTest", "()Ljava/lang/String;");
+                    const jsi::String &arg0 = arguments[0].getString(runtime);
+                    const jsi::String &arg1 = arguments[1].getString(runtime);
+                    __android_log_print(ANDROID_LOG_INFO,"linchangjian","arguments[0] %s ,arguments[1] %s",arg0.utf8(runtime).c_str(),arg1.utf8(runtime).c_str());
                     auto str = (jstring)env->CallStaticObjectMethod(globalClazz, runTest);
-
-                    const char *cStr = env->GetStringUTFChars(str, nullptr);
-
+                    auto runTest2 = env->GetStaticMethodID(globalClazz, "runTest2",
+                                                           "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;");
+                    auto str2 = (jstring)env->CallStaticObjectMethod(globalClazz,runTest2,env->NewStringUTF(arg0.utf8(runtime).c_str()),env->NewStringUTF(arg1.utf8(runtime).c_str()));
+                    const char *cStr = env->GetStringUTFChars(str2, nullptr);
                     return jsi::String::createFromAscii(runtime, cStr);
                 });
     }
-
-
 
     return jsi::Value::undefined();
 }
