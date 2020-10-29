@@ -1,17 +1,3 @@
-include ':jsilib'
 rootProject.name = 'ReactNativeJSITester'
-apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+
 include ':app'
-
-if ("${BUILD_RN_SOURCE}"){
-    include ':ReactAndroid'
-    project(':ReactAndroid').projectDir = new File(
-            rootProject.projectDir, '../node_modules/react-native/ReactAndroid')
-}
-
-if ("${BUILD_RN_SOURCE}"){
-    println "BUILD_RN_SOURCE is open ${BUILD_RN_SOURCE}"
-}else{
-    println "BUILD_RN_SOURCE is close ${BUILD_RN_SOURCE}"
-
-}

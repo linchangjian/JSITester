@@ -3,26 +3,20 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint .",
-    "bundle": "npx react-native bundle --platform android --entry-file index.js --bundle-output ./android/app/src/main/assets/index.android.bundle"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
   },
   "dependencies": {
-    "react": "16.13.1",
-    "react-native": "0.63.3"
+    "react": "16.8.3",
+    "react-native": "0.59.10"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/runtime": "^7.12.1",
-    "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^26.6.1",
-    "eslint": "^7.12.0",
     "jest": "^26.6.1",
     "metro-react-native-babel-preset": "^0.63.0",
-    "react-test-renderer": "16.13.1"
+    "react-test-renderer": "16.8.3"
   },
   "jest": {
     "preset": "react-native"
