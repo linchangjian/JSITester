@@ -7,10 +7,11 @@
 using namespace facebook;
 
 JavaVM *jvm;
-
 static jobject globalJObject;
 
 static jclass globalClazz;
+
+class dynamic;
 
 extern "C" JNIEXPORT jstring JNICALL
 Java_com_aniu_jsilib_NativeFunCallUtils_stringFromJNI(
@@ -84,7 +85,6 @@ jsi::Value JSIinstaller::get(
                         const jsi::Value *arguments,
                         size_t count) -> jsi::Value {
                     auto env = attachCurrentThread();
-
                     auto runTest = env->GetStaticMethodID(globalClazz, "runTest", "()Ljava/lang/String;");
                     auto str = (jstring)env->CallStaticObjectMethod(globalClazz, runTest);
 
