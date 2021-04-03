@@ -61,7 +61,7 @@ const App: () => React$Node = () => {
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Learn More</Text>
               <Text style={styles.sectionDescription}>
-                {global.ztlong.getStaticField()}
+                {global.ztlong.getStaticField("modulesName","logContent")}
               </Text>
             </View>
           </View>
